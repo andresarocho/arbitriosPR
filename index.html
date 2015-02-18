@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Arbritrios PR</title>
+      <!-- Custom styles for this template -->
+
+      <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  
+
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+         <!-- Fixed navbar -->
+     <script type="text/x-handlebars" data-template-name="nav">
+    <header>
+       <nav>
+        <div class="nav-wrapper  blue-grey darken-2">
+            <a href="#!" class="brand-logo">Arbitrios</a>
+           <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+            <ul class="right hide-on-med-and-down">
+                <li>{{#link-to 'calculation'}}Calcular Arbitrios{{/link-to}}</li>
+                <li>{{#link-to 'msrp'}}¿Qué es el MSRP?{{/link-to}}</li>
+                <li ><a href="#" {{action 'openMSRPModal'}}>Tabla de Arbitrios</a></li>
+            </ul>
+
+              <ul class="side-nav" id="mobile-demo">
+                <li>{{#link-to 'calculation'}}Calcular Arbitrios{{/link-to}}</li>
+                <li>{{#link-to 'msrp'}}¿Qué es el MSRP?{{/link-to}}</li>
+                <li ><a href="#" {{action 'openMSRPModal'}}>Tabla de Arbitrios</a></li>
+             </ul>
+        </div>
+        </nav>
+
+
+    </header>
+    <main>
+
+        {{outlet}}
+     </main>
+
+
+
+          <!-- Modal Structure -->
+          <div id="modal1" class="modal">
+            <div class="modal-content">
+                                <table>
+                    <thead>
+                      <tr>
+                          <th data-field="precioContributivo">Precio Contributivo</th>
+                          <th data-field="tax">Impuesto</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td>Hasta $6,170</td>
+                        <td>$637.50 (impuesto mínimo)</td>
+                      </tr>
+                      <tr>
+                        <td>Mayor de $6,170 hasta $10,690</td>
+                        <td>$637.50 más el 10.2% del exceso de $6,170</td>
+                      </tr>
+                      <tr>
+                        <td>Mayor de $10,690 hasta $21,380</td>
+                        <td>$1,098.00 más el 19.6% del exceso de $10,690</td>
+                      </tr>
+                        <tr>
+                        <td>Mayor de $21,380 hasta $31,780</td>
+                        <td>$3,188.35 más el 23.0% del exceso de $21,380</td>
+                      </tr>
+                      <tr>
+                        <td>Mayor de $31,780 hasta $44,890</td>
+                        <td>$5,575.15 más el 27.2% del exceso de $31,780</td>
+                      </tr>
+                      <tr>
+                        <td>Mayor de $44,890 </td>
+                        <td>$9,253.10 más el 34.0% del exceso de $44,890</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+            <div class="modal-footer">
+              <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">OK</a>
+            </div>
+          </div>
+
+
+
+          
+
+
+      </script>
+
+  <script type="text/x-handlebars" id="calculation">
+
+
+
+
+      <div class="container">
+        <!-- Page Content goes here -->
+        <br>
+        <h5 class="blue-text">Cálculo de arbitrios</h5>
+
+        <!--
+        <p class="caption">Created and designed by Google, Material Design is a design language that combines the classic principles of successful design
+          along with innovation and technology. Googles goal is to develop a system of design that allows for a unified user experience
+          across all their products on any platform.</p>
+        -->
+
+        <h6 >Precio sugerido por el manufacturero (MSRP):</h6>
+
+        <div >
+           <div class="input-field col s6">
+
+            {{focus-input focus-in='focused' type="text" id="carPrice"  value=carPrice  class="form-control input-lg valign-wrapper" placeholder="Ejemplo: 18,995"}}
+          </div>
+        </div>
+
+          <div >
+          <a {{action 'calcularArbitrios'}} href="#result" class="waves-effect waves-light btn blue-grey lighten-1">Calcular Arbitrios</a>
+          </div>
+    
+          {{#if isFinished}}
+            {{#if carPrice}}
+            <div class="card-panel">
+                  <div {{bind-attr class="animationClass"}} id="result" >
+
+                      <ul class="collection with-header">
+                        <li class="collection-header"><h5>Reporte de Arbitrios</h5></li>
+                        <li class="collection-item"><div>{{range}}</div></li>
+                        <li class="collection-item"><div>Usted pagará {{taxRange}}</div></li>
+                        <li class="collection-item"><div>Arbitrios a pagar:<a class="secondary-content">{{money taxesToPay}}</a></div></li>
+                        <li class="collection-item"><div>Precio total del vehículo: <a class="secondary-content">{{money totalPrice}}</a></div></li>
+                      </ul>
+                  </div>
+                  <br>
+                  <br>
+            </div>
+            {{/if}}
+          {{/if}}
+
+        </div>
+
+
+      </script>
+
+
+    <script type="text/x-handlebars" id="msrp">
+    <div class="container">
+
+    <h3 class="blue-text">¿Qué es el precio sugerido por el manufacturero (MSRP)?</h3>
+      <p>
+        Yehuda Katz is a member of the <a href="http://emberjs.com">Ember.js</a>, <a href="http://rubyonrails.org">Ruby on Rails</a>
+        and <a href="http://www.jquery.com">jQuery</a> Core Teams; he spends his daytime hours at the startup he founded,
+        <a href="http://www.tilde.io">Tilde Inc.</a>.
+      </p>
+
+      <p>
+        Yehuda is co-author of best-selling <a href="http://affiliate.manning.com/idevaffiliate.php?id=485_176">jQuery in Action</a> and
+        <a href="http://affiliate.manning.com/idevaffiliate.php?id=485_145">Rails 3 in Action</a>.
+      </p>
+
+      <p>
+        He spends most of his time hacking on open source—his main projects, along with others, like <a href="https://github.com/wycats/thor">Thor</a>,
+        <a href="http://www.handlebarsjs.com">Handlebars</a> and <a href="https://github.com/carlhuda/janus">Janus</a>—or traveling the world doing evangelism work.
+      </p>
+
+      <p>He can be found on Twitter as <a href="http://www.twitter.com/wycats">@wycats</a>.</p>
+    </div>
+  </script>
+
+    <script type="text/x-handlebars" id="msrpInfo">
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <table class='table'>
+            <thead>
+              <tr><th>Recent Posts</th></tr>
+            </thead>
+
+            <tbody>
+      
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="span9">
+          {{outlet}}
+        </div>
+      </div>
+    </div>
+  </script>
+
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/libs/ember-template-compiler-1.10.0.js"></script>
+  <script src="js/libs/ember-1.10.0.debug.js"></script>
+  <script src="js/accounting.js"></script>
+  <script src="js/calculateTax.js"></script>
+  <script src="js/app.js"></script>
+  <!-- to activate the test runner, add the "?test" query string parameter -->
+  <script src="tests/runner.js"></script>
+      <!-- Placed at the end of the document so the pages load faster -->  
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>
