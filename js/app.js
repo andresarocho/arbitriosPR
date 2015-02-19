@@ -60,15 +60,19 @@ App.CalculationController = Ember.Controller.extend({
   animationOut: 'img-rounded animated bounceOut',
 
   animationClass: function () {
-    return this.get('isFinished') && this.get('carPrice') ? 'animated bounceIn scrollspy' : 'animated bounceOut';
-  }.property('anyErrors','errors.email'),
+    return this.get('isFinished') && this.get('carPrice') ? 'animated bounceIn' : 'animated bounceOut';
+  }.property('result','errors.email'),
 
   carPriceValueObserver: function ()
   {
   	this.set('isFinished', false);
     carPrice = this.get('carPrice');
-    console.log(accounting.formatNumber(carPrice));
-    this.set('carPrice',accounting.formatNumber(carPrice));
+    if(carPrice)
+      this.set('carPrice',accounting.formatNumber(carPrice));
+    else
+    {
+      this.set('carPrice',carPrice);
+    }
   	// if(carPrice)
   	// 	this.set('isCarPriceEmpty',false);
 

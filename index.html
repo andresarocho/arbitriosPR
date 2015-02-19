@@ -7,10 +7,8 @@
 
       <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  
-
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="css/animate.css">
 </head>
 <body>
          <!-- Fixed navbar -->
@@ -18,7 +16,12 @@
     <header>
        <nav>
         <div class="nav-wrapper  blue-grey darken-2">
-            <a href="#!" class="brand-logo">Arbitrios</a>
+
+              <span class="left" style="padding-left:20px; padding-top:10px;"><img src="img/Icon-60.png" width="36px" class="hide-on-small-only"></span> 
+
+            <span class="brand-logo left" style="padding-left:15px;font-size: 1.5em;font-weight:400;">Arbitrios PR</span>
+
+
            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
             <ul class="right hide-on-med-and-down">
                 <li>{{#link-to 'calculation'}}Calcular Arbitrios{{/link-to}}</li>
@@ -87,9 +90,24 @@
             </div>
           </div>
 
-
-
-          
+<!--
+<footer class="page-footer">
+          <div class="container" style="background-color:#6094ac;">
+            <div class="row">
+              <div class="col l6 s12">
+              </div>
+              <div class="col l4 offset-l2 s12" style="height:200px;">
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2014 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+          -->
 
 
       </script>
@@ -97,12 +115,35 @@
   <script type="text/x-handlebars" id="calculation">
 
 
+      <div class="welcomeMessageContainer" style="height: 300px;">
 
+      </div>
+
+      <div class="container">
+         <div class="card-panel welcomeMessagePanel">
+                        <span class="flow-text gray-text">
+                        <i class="mdi-maps-directions-car"></i>
+                        ¿Estás buscando tu próximo carro? Calcula el arbitrio y ve preparado con números antes de visitar al dealer. 
+
+                        <h6 >Precio sugerido por el manufacturero (MSRP):</h6>
+
+                        <div >
+                         <div class="input-field col s6">
+
+                          {{focus-input focus-in='focused' type="text" id="carPrice"  value=carPrice  class="form-control input-lg valign-wrapper" placeholder="Ejemplo: 18,995"}}
+                        </div>
+                        </div>
+                        </span>
+                        <div >
+                        <a {{action 'calcularArbitrios'}} href="#result" class="waves-effect waves-light btn blue-grey lighten-1">Calcular Arbitrios</a>
+                        </div>
+          </div>
+      </div>
 
       <div class="container">
         <!-- Page Content goes here -->
         <br>
-        <h5 class="blue-text">Cálculo de arbitrios</h5>
+
 
         <!--
         <p class="caption">Created and designed by Google, Material Design is a design language that combines the classic principles of successful design
@@ -110,18 +151,6 @@
           across all their products on any platform.</p>
         -->
 
-        <h6 >Precio sugerido por el manufacturero (MSRP):</h6>
-
-        <div >
-           <div class="input-field col s6">
-
-            {{focus-input focus-in='focused' type="text" id="carPrice"  value=carPrice  class="form-control input-lg valign-wrapper" placeholder="Ejemplo: 18,995"}}
-          </div>
-        </div>
-
-          <div >
-          <a {{action 'calcularArbitrios'}} href="#result" class="waves-effect waves-light btn blue-grey lighten-1">Calcular Arbitrios</a>
-          </div>
     
           {{#if isFinished}}
             {{#if carPrice}}
@@ -129,14 +158,13 @@
                   <div {{bind-attr class="animationClass"}} id="result" >
 
                       <ul class="collection with-header">
-                        <li class="collection-header"><h5>Reporte de Arbitrios</h5></li>
-                        <li class="collection-item"><div>{{range}}</div></li>
+                        <li class="collection-header grey-text"><h5>Reporte de Arbitrios</h5></li>
+                        <li class="collection-item"><div>{{range}}<a class="secondary-content">{{money carPrice}}</a></div></li>
                         <li class="collection-item"><div>Usted pagará {{taxRange}}</div></li>
                         <li class="collection-item"><div>Arbitrios a pagar:<a class="secondary-content">{{money taxesToPay}}</a></div></li>
                         <li class="collection-item"><div>Precio total del vehículo: <a class="secondary-content">{{money totalPrice}}</a></div></li>
                       </ul>
                   </div>
-                  <br>
                   <br>
             </div>
             {{/if}}

@@ -26,7 +26,7 @@ var RANGE_PRICE6 = "Precio es mayor de " + accounting.formatMoney(PRICE_CONTRIBU
 
 
 
-var RANGE_TAX1 =  accounting.formatMoney(FIXED_PRICE1) + " (impuesto mínimo)";
+var RANGE_TAX1 = accounting.formatMoney(FIXED_PRICE1) + " (impuesto mínimo)";
 var RANGE_TAX2 = accounting.formatMoney(FIXED_PRICE1) + " más el %"+ FIXED_PERCENTAGE1 +" del exceso de " + accounting.formatMoney(PRICE_CONTRIBUTIVO1);
 var RANGE_TAX3 = accounting.formatMoney(FIXED_PRICE2) + " más el %"+ FIXED_PERCENTAGE2 +" del exceso de " + accounting.formatMoney(PRICE_CONTRIBUTIVO2);
 var RANGE_TAX4 = accounting.formatMoney(FIXED_PRICE3) + " más el %"+ FIXED_PERCENTAGE3 +" del exceso de " + accounting.formatMoney(PRICE_CONTRIBUTIVO3);
@@ -66,10 +66,10 @@ function calculateFixedTaxAndPercentage(carPrice)
 	}
     else if (carPrice <= PRICE_CONTRIBUTIVO5)
     {
-    	 return {"fixedTax":FIXED_PRICE4 , "percentage":FIXED_PERCENTAGE4/100.0, "excess":PRICE_CONTRIBUTIVO4, "range": RANGE_PRICE5, "taxRange": RANGE_TAX5};
+    	return {"fixedTax":FIXED_PRICE4 , "percentage":FIXED_PERCENTAGE4/100.0, "excess":PRICE_CONTRIBUTIVO4, "range": RANGE_PRICE5, "taxRange": RANGE_TAX5};
     }
     else
     {
-    	 return {"fixedTax":FIXED_PRICE5 , "percentage":FIXED_PERCENTAGE5/100.0, "excess":PRICE_CONTRIBUTIVO5, "range": RANGE_PRICE6, "taxRange": RANGE_TAX6};
+    	return {"fixedTax":FIXED_PRICE5 , "percentage":FIXED_PERCENTAGE5/100.0, "excess":PRICE_CONTRIBUTIVO5, "range": RANGE_PRICE6, "taxRange": RANGE_TAX6};
     }
 }
